@@ -4,15 +4,24 @@ from django.contrib.auth.models import User
 
 class Volunteer(models.Model):
     user = models.OneToOneField(User)
-    is_banned = models.BooleanField(default=False, blank=True)
-    photo = models.ImageField(upload_to='profiles')
-    phone = models.CharField(max_length=10)
-    address = models.CharField(max_length=200)
-    state = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=9)
-    emergency_name = models.CharField(max_length=100)
-    emergency_phone = models.CharField(max_length=10)
-    emergency_email = models.CharField(max_length=100)
+    is_banned = models.BooleanField(default=False)
+    photo = models.ImageField(upload_to='profiles', null=True)
+    phone = models.CharField(max_length=10, null=True)
+    address = models.CharField(max_length=200, null=True)
+    state = models.CharField(max_length=100, null=True)
+    zipcode = models.CharField(max_length=9, null=True)
+    birthdate = models.DateField(auto_now=False, null=True)
+    emergency_name = models.CharField(max_length=100, null=True)
+    emergency_phone = models.CharField(max_length=10, null=True)
+    emergency_email = models.CharField(max_length=100, null=True)
+
+    def as_json(self):
+        return dict(
+            id=self.id, 
+            first_name = self.user.first_name,
+            last_name = self.user.last_name,
+            phone=self.phone, 
+            address=self.address,)
 
 class TaskLocation(models.Model):
     name = models.CharField(max_length=100)
