@@ -23,4 +23,4 @@ def index(request):
 
     # vol_data = serializers.serialize('json', volunteers)
 
-    return HttpResponse(json.dumps(results), content_type='json')
+    return HttpResponse(json.dumps(results), content_type='jsonp')

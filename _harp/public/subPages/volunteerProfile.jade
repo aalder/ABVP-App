@@ -1,8 +1,11 @@
+
 .container
   .jumbotron
-    h1 Welcome #{volunteerName}
+    h1 Welcome 
+      span.fullname 
     img.profile-pic(src="/img/L.jpg")
-    p Username: #{username} 
+    p Username: 
+      span.username
     a(href="/subpages/changePassword") Change Password
     p Age: #{age}
     p Address: #{address}

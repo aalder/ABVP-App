@@ -18,6 +18,7 @@ class Volunteer(models.Model):
     def as_json(self):
         return dict(
             id=self.id, 
+            username = self.user.username,
             first_name = self.user.first_name,
             last_name = self.user.last_name,
             phone=self.phone, 
