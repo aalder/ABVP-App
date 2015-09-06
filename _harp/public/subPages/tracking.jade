@@ -1,0 +1,8 @@
+.container
+  != partial("../_partials/header")
+  .row
+    h1 Tracking
+  .row
+    each location in locations
+      .col-sm-6
+        != partial("_location", location)
