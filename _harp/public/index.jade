@@ -2,10 +2,10 @@
     .jumbotron
         h1 ABVP-App Initial
         div.loginbox
-          form(name="login", action="/subPages/tracking", method="post")
+          form(name="login", action="/subPages/volunteerProfile", method="post")
            input(type="text", name="user")
            input(type="password", name="pass")
            input(type="submit", value="login")
         p I've set up the bootstrap with the harp so we can do things now
         p
-          a.btn.btn-primary.btn-lg(href="volunteerProfile") Go to Volunteer Profile Page
+          a.btn.btn-primary.btn-lg(href="/subPages/tracking") Go to Tracking Page
