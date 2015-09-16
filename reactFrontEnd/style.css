@@ -1,5 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Lora);
 body {
   background-color: #EEEEEE;
+  font-family: 'Lora', serif;
+}
+h1 {
+  font-family: 'Alice', serif;
 }
 #header {
     background-color:black;
@@ -10,15 +15,58 @@ body {
 #nav {
     line-height:30px;
     background-color:#eeeeee;
-    height:300px;
-    width:100px;
+    height:10%;
+    width:100%;
     float:left;
     padding:5px; 
+    text-align: right;
+}
+.nav {
+    display: inline-block;
+    margin: 10px;
 }
 #footer {
     background-color:black;
+    height:10%;
+    width:100%;
     color:white;
     clear:both;
     text-align:center;
     padding:5px; 
+}
+
+#frontpage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align:center;
+}
+
+.location {
+    width: 45%;
+    height: 400px;
+    overflow: auto;
+    display:inline-block;
+}
+
+.member{
+    display:inline-block;
+    width: 200px;
+    height: 240px;
+    overflow:hidden;
+    transition: 1s;
+    background-color: #a82020;
+    color: #cdf9ff;
+    transition: .75s;
+    padding: 5px;
+    font-family: roboto;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 5px;
+}
+.member:hover{
+    height: 240px;
 }
