@@ -64,8 +64,6 @@
       var id = url('?id');
       var profileBoxDiv = <ProfileBox url={"http://localhost:8000/volunteer/" + id} pollInterval={10000} />;
 
-      alert(id);
-
       ReactDOM.render(
        profileBoxDiv,
         document.getElementById('volunteer-info')
