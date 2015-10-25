@@ -41,12 +41,12 @@
           return(
             <div className="profileBox">
               <h1>Volunteer Profile</h1>
-              <h2>{volData.first_name} {volData.last_name}</h2>
-              <p>Username: {volData.username}</p>
+              <h2><div classname="reactData">{volData.first_name} {volData.last_name}</div></h2>
+              <p>Username: <div classname="reactData">{volData.username}</div></p>
               <a href=""> Change Password</a>
-              <p> Birthdate: {volData.birthdate}</p>
-              <p> Address: {volData.address}<br/>{volData.state} {volData.zipcode}</p>
-              <p>Phone: {volData.phone}</p>
+              <p> Birthdate: <div classname="reactData">{volData.birthdate}</div></p>
+              <p> Address: <div classname="reactData">{volData.address}<br/>{volData.state} {volData.zipcode}</div></p>
+              <p>Phone: <div classname="reactData">{volData.phone}</div></p>
               <p>Emergency Contact:</p>
               <div className="emergency contact">
                 <p>Name: </p>

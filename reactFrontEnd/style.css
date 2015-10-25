@@ -1,122 +1,128 @@
 @import url(https://fonts.googleapis.com/css?family=Lora);
+/*FONTS*/
+/*COLORS*/
+/*GENERALS*/
 body {
   background-color: #EEEEEE;
-  font-family: 'Lora', serif;
-}
+  font-family: "Lora", serif; }
+
 h1 {
-  font-family: 'Alice', serif;
-}
+  font-family: "Alice", serif; }
+
+/*HEADER & FOOTER*/
 #header {
-    background-color:black;
-    color:white;
-    text-align:center;
-    padding:5px;
-}
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 5px; }
+
 #nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:10%;
-    width:100%;
-    float:left;
-    padding:5px; 
-    text-align: right;
-}
+  line-height: 30px;
+  background-color: #EEEEEE;
+  height: 10%;
+  width: 100%;
+  float: left;
+  padding: 5px;
+  text-align: right; }
+
 .nav {
-    display: inline-block;
-    margin: 10px;
-}
+  display: inline-block;
+  margin: 10px; }
+
 #footer {
-    background-color:black;
-    height:10%;
-    width:100%;
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px; 
-}
+  background-color: #000000;
+  height: 10%;
+  width: 100%;
+  color: #FFFFFF;
+  clear: both;
+  text-align: center;
+  padding: 5px; }
 
+/*LOGIN PAGE*/
 #frontpage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    text-align:center;
-}
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  text-align: center; }
 
+/*PROFILE PAGE*/
+.profileBox {
+  padding: 0 0 0 50px; }
+  .profileBox .reactData {
+    color: #590085; }
+  .profileBox a {
+    color: #000000; }
+    .profileBox a:hover {
+      color: #F7CF00; }
+
+/*CHECKIN & CHECKOUT*/
 .location {
-    width: 45%;
-    height: 400px;
-    overflow: auto;
-    display:inline-block;
-}
+  width: 45%;
+  height: 400px;
+  overflow: auto;
+  display: inline-block; }
 
-.member{
-    display:inline-block;
-    width: 200px;
-    height: 240px;
-    overflow:hidden;
-    transition: 1s;
-    background-color: #a82020;
-    color: #cdf9ff;
-    transition: .75s;
-    padding: 5px;
-    font-family: roboto;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 5px;
-}
-.member:hover{
-    height: 240px;
-}
+.member {
+  display: inline-block;
+  width: 200px;
+  height: 240px;
+  overflow: hidden;
+  transition: 1s;
+  background-color: #a82020;
+  color: #cdf9ff;
+  transition: .75s;
+  padding: 5px;
+  font-family: "Lora", serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 5px; }
+  .member:hover {
+    height: 240px; }
 
 .checkedout {
-    display:inline-block;
-    width: 200px;
-    height: 240px;
-    overflow:hidden;
-    transition: 1s;
-    background-color: #a82020;
-    color: #cdf9ff;
-    transition: .5s;
-    padding: 5px;
-    font-family: roboto;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 5px;
-}
-
-.checkedout:hover {
-    background-color: #0000FF;
-}
+  display: inline-block;
+  width: 200px;
+  height: 240px;
+  overflow: hidden;
+  transition: 1s;
+  background-color: #a82020;
+  color: #cdf9ff;
+  transition: .5s;
+  padding: 5px;
+  font-family: "Lora", serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 5px; }
+  .checkedout:hover {
+    background-color: #0000FF; }
 
 .selectionBox {
-    width: 90%;
-    height: auto;
-    padding: 25px;
-    border: 5px solid navy;
-    margin: 25px;
-    text-align: left;
-}
+  width: 90%;
+  height: auto;
+  padding: 25px;
+  border: 5px solid navy;
+  margin: 25px;
+  text-align: left; }
 
 .reserves {
-    display:inline-block;
-    width: 200px;
-    height: 240px;
-    transition: 1s;
-    background-color: #a82020;
-    color: #cdf9ff;
-    transition: .5s;
-    padding: 5px;
-    font-family: roboto;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 5px;
-}
+  display: inline-block;
+  width: 200px;
+  height: 240px;
+  transition: 1s;
+  background-color: #a82020;
+  color: #cdf9ff;
+  transition: .5s;
+  padding: 5px;
+  font-family: roboto;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 5px; }
+  .reserves:hover {
+    background-color: #0000FF; }
 
-.reserves:hover {
-    background-color: #0000FF;
-}
+/*# sourceMappingURL=style.css.map */

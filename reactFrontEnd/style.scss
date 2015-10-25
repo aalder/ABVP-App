@@ -1,0 +1,159 @@
+@import url(https://fonts.googleapis.com/css?family=Lora);
+
+/*FONTS*/
+$LORA: 'Lora', serif;
+$ALICE: 'Alice', serif;
+
+/*COLORS*/
+$BLACK: #000000;
+$WHITE: #FFFFFF;
+$GRAY: #EEEEEE;
+$PURPLE: #590085;
+$YELLOW: #F7CF00;
+
+/*GENERALS*/
+body {
+  background-color: $GRAY;
+  font-family: $LORA;
+}
+h1 {
+  font-family: $ALICE;
+}
+
+
+/*HEADER & FOOTER*/
+#header {
+    background-color: $BLACK;
+    color: $WHITE;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color: $GRAY;
+    height:10%;
+    width:100%;
+    float:left;
+    padding:5px;
+    text-align: right;
+}
+.nav {
+    display: inline-block;
+    margin: 10px;
+}
+#footer {
+    background-color: $BLACK;
+    height:10%;
+    width:100%;
+    color: $WHITE;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+/*LOGIN PAGE*/
+#frontpage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align:center;
+}
+
+/*PROFILE PAGE*/
+.profileBox {
+    padding: 0 0 0 50px;
+
+    .reactData {
+        color: $PURPLE;
+    }
+
+    a {
+        color: $BLACK;
+
+        &:hover{
+            color: $YELLOW;
+        }
+    }
+}
+
+
+/*CHECKIN & CHECKOUT*/
+.location {
+    width: 45%;
+    height: 400px;
+    overflow: auto;
+    display:inline-block;
+}
+
+.member{
+    display:inline-block;
+    width: 200px;
+    height: 240px;
+    overflow:hidden;
+    transition: 1s;
+    background-color: #a82020;
+    color: #cdf9ff;
+    transition: .75s;
+    padding: 5px;
+    font-family: $LORA;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 5px;
+
+    &:hover{
+        height: 240px;
+    }
+}
+
+.checkedout {
+    display:inline-block;
+    width: 200px;
+    height: 240px;
+    overflow:hidden;
+    transition: 1s;
+    background-color: #a82020;
+    color: #cdf9ff;
+    transition: .5s;
+    padding: 5px;
+    font-family: $LORA;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 5px;
+
+    &:hover {
+        background-color: #0000FF;
+    }
+}
+
+.selectionBox {
+    width: 90%;
+    height: auto;
+    padding: 25px;
+    border: 5px solid navy;
+    margin: 25px;
+    text-align: left;
+}
+
+.reserves {
+    display:inline-block;
+    width: 200px;
+    height: 240px;
+    transition: 1s;
+    background-color: #a82020;
+    color: #cdf9ff;
+    transition: .5s;
+    padding: 5px;
+    font-family: roboto;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 5px;
+
+    &:hover {
+        background-color: #0000FF;
+    }
+}
