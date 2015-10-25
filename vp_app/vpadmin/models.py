@@ -37,10 +37,11 @@ class TaskLocation(models.Model):
     is_active = models.BooleanField(default=True)
 
 class ShiftLog(models.Model):
-    volunteer = models.ForeignKey(Volunteer)
-    task_location = models.ForeignKey(TaskLocation)
-    logged_by = models.ForeignKey(User)
+    volunteer = models.ForeignKey(User, null=True, related_name='vol_user')
+    task_location = models.ForeignKey(TaskLocation, null=True)
+    co_logged_by = models.ForeignKey(User, null=True, related_name='co_logged_by')
     check_out = models.DateTimeField(null=True)
+    ci_logged_by = models.ForeignKey(User, null=True, related_name='ci_logged_by')
     check_in = models.DateTimeField(null=True)
     total_hours = models.IntegerField(null=True)
     
