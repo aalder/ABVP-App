@@ -8,6 +8,7 @@
 # Directories #
 ###############
 logs/
+vp_app/vpadmin/migrations/
 
 # Specific files #
 ##################
