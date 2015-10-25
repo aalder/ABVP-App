@@ -70,3 +70,53 @@ h1 {
 .member:hover{
     height: 240px;
 }
+
+.checkedout {
+    display:inline-block;
+    width: 200px;
+    height: 240px;
+    overflow:hidden;
+    transition: 1s;
+    background-color: #a82020;
+    color: #cdf9ff;
+    transition: .5s;
+    padding: 5px;
+    font-family: roboto;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 5px;
+}
+
+.checkedout:hover {
+    background-color: #0000FF;
+}
+
+.selectionBox {
+    width: 90%;
+    height: auto;
+    padding: 25px;
+    border: 5px solid navy;
+    margin: 25px;
+    text-align: left;
+}
+
+.reserves {
+    display:inline-block;
+    width: 200px;
+    height: 240px;
+    transition: 1s;
+    background-color: #a82020;
+    color: #cdf9ff;
+    transition: .5s;
+    padding: 5px;
+    font-family: roboto;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 5px;
+}
+
+.reserves:hover {
+    background-color: #0000FF;
+}
