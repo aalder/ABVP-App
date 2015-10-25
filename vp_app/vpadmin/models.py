@@ -10,6 +10,7 @@ class Volunteer(models.Model):
     photo = models.ImageField(upload_to='profiles', null=True)
     phone = models.CharField(max_length=10, null=True)
     address = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=100, null=True)
     zipcode = models.CharField(max_length=9, null=True)
     birthdate = models.DateField(auto_now=False, null=True)
@@ -25,6 +26,7 @@ class Volunteer(models.Model):
             last_name = self.user.last_name,
             phone=self.phone, 
             address=self.address,
+            city=self.city,
             state=self.state,
             zipcode=self.zipcode,
             birthdate=str(self.birthdate),)

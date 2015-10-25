@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello React!</title>
+    <title>Volunteer Profile</title>
     <script src="build/react.js"></script>
     <script src="build/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
@@ -15,6 +15,7 @@
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/url.min.js"></script>
     <script type="text/babel">
+
       var ProfileBox = React.createClass({
         loadProfile: function() {
           $.ajax({
@@ -23,11 +24,12 @@
             cache: false,
             success: function(data) {
               this.setState({data: data});
+              document.title = data.first_name + "'s Profile";
             }.bind(this),
             error: function(xhr, status, err) {
               console.error(this.props.url, status, err.toString());
             }.bind(this)
-          });
+          });          
         },
         getInitialState: function() {
           return {data: []};
@@ -45,7 +47,7 @@
               <p>Username: {volData.username}</p>
               <a href=""> Change Password</a>
               <p> Birthdate: {volData.birthdate}</p>
-              <p> Address: {volData.address}<br/>{volData.state} {volData.zipcode}</p>
+              <p> Address: {volData.address}<br/>{volData.city}, {volData.state} {volData.zipcode}</p>
               <p>Phone: {volData.phone}</p>
               <p>Emergency Contact:</p>
               <div className="emergency contact">
