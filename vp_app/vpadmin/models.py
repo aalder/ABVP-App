@@ -43,7 +43,7 @@ class ShiftLog(models.Model):
     check_out = models.DateTimeField(null=True)
     ci_logged_by = models.ForeignKey(User, null=True, related_name='ci_logged_by')
     check_in = models.DateTimeField(null=True)
-    total_hours = models.IntegerField(null=True)
+    total_hours = models.FloatField(null=True)
     
 class VolunteerRequest(models.Model):
     task_location = models.ForeignKey(TaskLocation)
