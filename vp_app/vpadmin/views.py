@@ -34,7 +34,7 @@ def index(request):
     return HttpResponse(json.dumps(results), content_type='jsonp')
 
 def volunteer(request, vol_id):
-    volunteer = Volunteer.objects.get(id = vol_id)
+    volunteer = Volunteer.objects.get(user = User.objects.get(pk = vol_id))
     if volunteer is not None:
         results = volunteer.as_json()
         return HttpResponse(json.dumps(results), content_type='jsonp')
@@ -48,6 +48,7 @@ def checkout(request):
     #  "users": [{"id": 2},{"id": 3}]
     # }
     try:
+        print(request.body)
         co_data = json.loads(request.body)
         co_timestamp = datetime.fromtimestamp(co_data['time']/1000.0)
         co_logged_by = User.objects.get(pk=co_data['logged_by'])
@@ -62,7 +63,8 @@ def checkout(request):
                 shiftlog_new = ShiftLog(volunteer=vol, co_logged_by = co_logged_by, check_out = co_timestamp, task_location = co_tasklocation)
                 shiftlog_new.save()
         return HttpResponse('{"result": "success"}')
-    except Exception:
+    except Exception as e:
+        print(e);
         return HttpResponse('{"result": "failure"}')
 
 @csrf_exempt
@@ -70,16 +72,16 @@ def checkin(request):
     # example data
     # { "logged_by": 3,
     #  "time": 1445810528279,
-    #  "task": 1,
-    #  "users": [{"id": 2},{"id": 3}]
+    #  "users": [{"id": 2, "task": 1},{"id": 3, "task": 1}]
     # }
     try:
         ci_data = json.loads(request.body)
         ci_timestamp = datetime.fromtimestamp(ci_data['time']/1000.0)
         ci_logged_by = User.objects.get(pk=ci_data['logged_by'])
-        ci_tasklocation = TaskLocation.objects.get(pk=ci_data['task'])
+        
         for user in ci_data['users']:
             vol = User.objects.get(pk=user['id'])
+            ci_tasklocation = TaskLocation.objects.get(pk=user['task'])
             try:
                 shiftlog_entry = ShiftLog.objects.filter(volunteer = vol, task_location = ci_tasklocation, check_in = None)[0]
 
@@ -102,7 +104,17 @@ def checkin(request):
 @csrf_exempt
 def open_logs(request):
     # try:
-    open_entries = []
+    open_entries = {}
+    
+    tasks = TaskLocation.objects.filter(is_active = True)
+    for task in tasks:
+        open_task = {}
+        open_task['task_id'] = task.id
+        open_task['name'] = task.name
+        open_task['location'] = task.room
+        open_task['volunteers'] = []
+        open_entries[str(task.id)] = open_task
+
     log_entries = ShiftLog.objects.filter(check_in = None)
     print(log_entries)
     for entry in log_entries:
@@ -114,9 +126,9 @@ def open_logs(request):
         open_entry['first_name'] = entry.volunteer.first_name
         open_entry['last_name'] = entry.volunteer.last_name
         open_entry['check_out'] = time.mktime(entry.check_out.timetuple())*1000
-        open_entries.append(open_entry)
+        (open_entries[str(entry.task_location.id)])['volunteers'].append(open_entry)
     print(open_entries)
-    return HttpResponse(json.dumps(open_entries))
+    return HttpResponse(json.dumps(open_entries.values()))
 
     # except Exception:
     #     return HttpResponse('{"result": "failure"}')
@@ -128,7 +140,7 @@ def available_vols(request):
     print(checked_out)
     # users.exclude(checked_out__)
     print(users)
-    available_users = User.objects.exclude(id__in = checked_out)
+    available_users = User.objects.filter(is_active = True, is_staff = False).exclude(id__in = checked_out)
     print(available_users)
     available_array = []
     for user in available_users:
