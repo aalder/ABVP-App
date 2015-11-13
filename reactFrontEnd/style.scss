@@ -3,6 +3,7 @@
 /*FONTS*/
 $LORA: 'Lora', serif;
 $ALICE: 'Alice', serif;
+$VERDANA: Verdana, sans-serif;
 
 /*COLORS*/
 $BLACK: #000000;
@@ -10,24 +11,48 @@ $WHITE: #FFFFFF;
 $GRAY: #EEEEEE;
 $PURPLE: #590085;
 $YELLOW: #F7CF00;
+$PINK: #FF008B;
 
 /*GENERALS*/
 body {
-  background-color: $GRAY;
-  font-family: $LORA;
+  font-family: $VERDANA;
+  font-weight: normal;
+  margin: 0;
 }
-h1 {
-  font-family: $ALICE;
+
+html {
+  background: url(images/abvpapp_bg01.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 
 /*HEADER & FOOTER*/
+/*
 #header {
-    background-color: $BLACK;
+    background-color: $PURPLE;
     color: $WHITE;
     text-align:center;
-    padding:5px;
+    padding:20px;
+
+    img {
+        float: left;
+        z-index: 10;
+        width: auto;
+        height: 50px;
+        padding-left: 20px;
+    }
+
+    h1 {
+        display: inline;
+        vertical-align: bottom;
+        float: center;
+    }
 }
+*/
+
 #nav {
     line-height:30px;
     background-color: $GRAY;
@@ -43,12 +68,24 @@ h1 {
 }
 #footer {
     background-color: $BLACK;
-    height:10%;
+    height: 50px;
     width:100%;
     color: $WHITE;
     clear:both;
     text-align:center;
     padding:5px;
+    position: fixed;
+    bottom: 0;
+
+    a {
+        text-decoration: none;
+        color: $WHITE;
+
+        &:hover {
+            color: $YELLOW;
+            text-decoration: underline;
+        }
+    }
 }
 
 /*LOGIN PAGE*/
@@ -62,22 +99,108 @@ h1 {
 }
 
 /*PROFILE PAGE*/
-.profileBox {
-    padding: 0 0 0 50px;
 
-    .reactData {
-        color: $PURPLE;
+//puts together the boarder
+#profile-page {
+    #top, #bottom, #left, #right {
+        background: black;
+        position: fixed;
     }
+    #left, #right {
+        top: 0; bottom: 0;
+        width: 15px;
+    }
+    #left { left: 0; }
+    #right { right: 0; }
 
-    a {
-        color: $BLACK;
+    #top, #bottom {
+        left: 0; right: 0;
+        height: 15px;
+    }
+    #top { top: 0; }
+    #bottom { bottom: 0; }
+}
 
-        &:hover{
-            color: $YELLOW;
-        }
+
+#header-profile {
+    h1 {
+        padding: 5px 0 5px 150px;
+        font-size: 30pt;
     }
 }
 
+#volunteer-info {
+    padding-bottom: 500px;
+}
+
+.profileBox {
+    padding: 0 50px 0 50px;
+
+    .profileInformation {
+        width: 100%;
+        float:left;
+        padding: 0px 10px 0px 10px;
+        margin: 25px;
+        margin-top: 0px;
+
+        .subInfo {
+            padding-left: 30px;
+            padding-bottom: 30px;
+            width: 50%;
+
+            .imported {
+                display: inline-block;
+                vertical-align: bottom;
+                text-decoration: bold;
+                color: $PURPLE;
+            }
+        }
+
+        h1 {
+
+        }
+
+        .imageStack {
+            float: right;
+            padding-right: 50px;
+
+            img {
+                vertical-align: top;
+                height: 200px;
+                display: block;
+            }
+
+            button {
+                padding: 10px 100px 10px 100px;
+                background-color: $PURPLE;
+                border: none;
+                color: white;
+                font-size: 20px;
+                text-decoration:none;
+                float: right;
+                border-radius: 25px;
+
+                &:hover {
+                    color: black;
+                    background-color: $PINK;
+                }
+            }
+        }
+
+        .secondColumn {
+            width: 200 px;
+        }
+
+        h3 {
+            display: inline;
+            padding-bottom: 10px;
+        }
+
+        a {
+            padding-bottom: 10px;
+        }
+    }
+}
 
 /*CHECKIN & CHECKOUT*/
 .location {
@@ -97,7 +220,7 @@ h1 {
     color: #cdf9ff;
     transition: .75s;
     padding: 5px;
-    font-family: $LORA;
+    font-family: $VERDANA;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -118,7 +241,7 @@ h1 {
     color: #cdf9ff;
     transition: .5s;
     padding: 5px;
-    font-family: $LORA;
+    font-family: $VERDANA;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -147,7 +270,7 @@ h1 {
     color: #cdf9ff;
     transition: .5s;
     padding: 5px;
-    font-family: roboto;
+    font-family: $VERDANA;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
