@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^checkin/$', views.checkin, name='checkin'),
     url(r'^checkedout/$', views.open_logs, name='checkedout'),
     url(r'^available/$', views.available_vols, name='available'),
+    url(r'^availabletasks/$', views.available_tasks, name='availabletasks'),
 ]

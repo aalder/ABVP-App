@@ -150,3 +150,16 @@ def available_vols(request):
         available['last_name'] = user.last_name
         available_array.append(available)
     return HttpResponse(json.dumps(available_array))
+
+@csrf_exempt
+def available_tasks(request):
+    tasks = TaskLocation.objects.filter(is_active = True)
+    avail_tasks_array = []
+    for task in tasks:
+        task_dict = {}
+        task_dict['id'] = task.id
+        task_dict['name'] = task.name
+        task_dict['room'] = task.room
+        avail_tasks_array.append(task_dict)
+    return HttpResponse(json.dumps(avail_tasks_array))
+
