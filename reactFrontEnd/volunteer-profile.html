@@ -21,10 +21,10 @@
       <div id="volunteer-info" class="front-page"></div>
 
       <!--FILLS IN PROFILE INFORMATION-->
-      <script src="js/jquery-2.1.4.min.js"></script>
-      <script src="js/url.min.js"></script>
-      <script type="text/babel">
-
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/url.min.js"></script>
+    <script type="text/babel">
         var ProfileBox = React.createClass({
           loadProfile: function() {
             $.ajax({
@@ -54,7 +54,6 @@
                 <h1>Volunteer Profile</h1>
                 <div className="profileInformation">
                   <h2>{volData.first_name} {volData.last_name}</h2>
-
                   <div className="imageStack">
                     <img src={'images/profilePic.png'} className="profilePic"/>
                     <br/>
