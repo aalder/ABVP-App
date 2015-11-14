@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Volunteer Profile</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+  </head>
+  <body>
+    <div id="available-volunteers" class="front-page">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../js/url.min.js"></script>
+    <script type="text/babel">
+
+      var TaskVolunteersBox = React.createClass({
+        render: function() {
+          var volData = this.props.volunteers;
+          var volNodes = volData.map(function(vol){
+            return (
+              <p className="volunteer-node" key={vol.user_id}><input type="checkbox" name="task-vol" data-task={vol.task_id} value={vol.user_id} />{vol.first_name} {vol.last_name}</p>
+            );
+          });
+          return (
+            <div className="taskVolunteersBox">
+              {volNodes}
+            </div>
+          );
+        }
+      });
+
+      var CheckinForm = React.createClass({
+        loadList: function() {
+          $.ajax({
+            url: this.props.openUrl,
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+              this.setState({data: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.openUrl, status, err.toString());
+            }.bind(this)
+          });          
+        },
+        getInitialState: function() {
+          return {data: []};
+        },
+        componentDidMount: function() {
+          this.loadList();
+          setInterval(this.loadList, this.props.pollInterval);
+        },
+        handleSubmit: function(e) {
+          e.preventDefault();
+
+          var openVolArray = new Array();
+
+          $("input:checkbox[name=task-vol]:checked").each(function(){
+            var ciTask = $(this).data('task');
+            console.log(ciTask);
+            var idNode = {id: $(this).val(), task: ciTask}
+            openVolArray.push(idNode);
+            console.log(JSON.stringify(openVolArray));
+          });
+
+          var ciTime = (new Date()).getTime();
+          var checkOutData = {logged_by: 2, time: ciTime, users: openVolArray}
+          console.log(JSON.stringify(checkOutData))
+
+           $.ajax({
+            url: this.props.ciUrl,
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify(checkOutData),
+            success: function(data) {
+              // this.setState({data: data});
+              console.log(JSON.stringify(data));
+              // location.reload();
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.url, status, err.toString());
+            }.bind(this)
+          });
+        },
+        render: function() {
+          var openData = this.state.data;
+          var taskNodes = openData.map(function(task) {
+            return (
+              <div key={task.task_id} className="task-div">
+                <p>{task.name} ({task.location})</p>
+                <TaskVolunteersBox volunteers = {task.volunteers} />
+              </div>
+            );     
+          });
+          return(
+            <form className="checkinForm" onSubmit={this.handleSubmit}>
+                {taskNodes}
+                <input type="submit" value="Check In"/>
+            </form>
+          );
+        }
+      });
+
+      var checkinFormDiv = <CheckinForm openUrl={"http://localhost:8000/checkedout/"} ciUrl={"http://localhost:8000/checkin/"} pollInterval={10000} />;
+
+      ReactDOM.render(
+       checkinFormDiv,
+        document.getElementById('available-volunteers')
+      );
+    </script>
+  </body>
+</html>

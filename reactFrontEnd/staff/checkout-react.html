@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Volunteer Profile</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+  </head>
+  <body>
+    <div id="available-volunteers" class="front-page">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../js/url.min.js"></script>
+    <script type="text/babel">
+
+      var AvailableForm = React.createClass({
+        loadList: function() {
+          $.ajax({
+            url: this.props.availUrl,
+            dataType: 'json',
+            cache: false,
+            success: function(data) {
+              this.setState({data: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.availUrl, status, err.toString());
+            }.bind(this)
+          });          
+        },
+        getInitialState: function() {
+          return {data: []};
+        },
+        componentDidMount: function() {
+          this.loadList();
+          setInterval(this.loadList, this.props.pollInterval);
+        },
+        handleSubmit: function(e) {
+          e.preventDefault();
+
+          var availVolArray = new Array();
+
+          $("input:checkbox[name=avail-vol]:checked").each(function(){
+            var idNode = {id: $(this).val()}
+            availVolArray.push(idNode);
+            console.log(JSON.stringify(availVolArray));
+          });
+
+          var coTime = (new Date()).getTime();
+          var checkOutData = {logged_by: 2, time: coTime, task: 1, users: availVolArray}
+          console.log(JSON.stringify(checkOutData))
+
+           $.ajax({
+            url: this.props.coUrl,
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify(checkOutData),
+            success: function(data) {
+              // this.setState({data: data});
+              console.log(JSON.stringify(data));
+              // location.reload();
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.url, status, err.toString());
+            }.bind(this)
+          });
+        },
+        render: function() {
+          var availData = this.state.data;
+          var volNodes = availData.map(function(vol) {
+            return (
+              <div key={vol.id} className="volunteer-checkbox">
+                <input type="checkbox" name="avail-vol" value={vol.id}/>{vol.first_name} {vol.last_name}
+              </div>
+            );     
+          });
+          return(
+            <form className="availableForm" onSubmit={this.handleSubmit}>
+                {volNodes}
+                <input type="submit" value="Check Out"/>
+            </form>
+          );
+        }
+      });
+
+      var availableFormDiv = <AvailableForm availUrl={"http://localhost:8000/available/"} coUrl={"http://localhost:8000/checkout/"} pollInterval={10000} />;
+
+      ReactDOM.render(
+       availableFormDiv,
+        document.getElementById('available-volunteers')
+      );
+    </script>
+  </body>
+</html>
