@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Lora);
+
+/*FONTS*/
+$LORA: 'Lora', serif;
+$ALICE: 'Alice', serif;
+$VERDANA: Verdana, sans-serif;
+
+/*COLORS*/
+$BLACK: #000000;
+$WHITE: #FFFFFF;
+$GRAY: #EEEEEE;
+$PURPLE: #590085;
+$YELLOW: #F7CF00;
+$PINK: #FF008B;
+
+/*GENERALS*/
+body {
+  font-family: $VERDANA;
+  font-weight: normal;
+  margin: 0;
+}
+
+html {
+  background: url(images/abvpapp_bg01.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/*HEADER & FOOTER*/
+#header {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+}
