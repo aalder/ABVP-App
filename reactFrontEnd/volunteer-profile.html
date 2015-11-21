@@ -63,8 +63,16 @@
         }
       });
 
+      var hostUrl = "";
+      if (document.location.hostname == "localhost") {
+        hostUrl = "http://localhost:8000/api/";
+      }
+      else {
+        hostUrl = "http://minion.wingchi.net/api/";
+      }
+
       var id = url('?id');
-      var profileBoxDiv = <ProfileBox url={"http://localhost:8000/volunteer/" + id} pollInterval={10000} />;
+      var profileBoxDiv = <ProfileBox url={hostUrl + "volunteer/" + id} pollInterval={10000} />;
 
       ReactDOM.render(
        profileBoxDiv,

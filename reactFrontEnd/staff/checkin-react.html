@@ -141,8 +141,16 @@
           );
         }
       });
+      
+      var hostUrl = "";
+      if (document.location.hostname == "localhost") {
+        hostUrl = "http://localhost:8000/api/";
+      }
+      else {
+        hostUrl = "http://minion.wingchi.net/api/";
+      }
 
-      var checkinFormDiv = <CheckinForm openUrl={"http://localhost:8000/checkedout/"} ciUrl={"http://localhost:8000/checkin/"} pollInterval={1000} />;
+      var checkinFormDiv = <CheckinForm openUrl={hostUrl + "checkedout/"} ciUrl={"http://localhost:8000/checkin/"} pollInterval={1000} />;
 
       ReactDOM.render(
        checkinFormDiv,
