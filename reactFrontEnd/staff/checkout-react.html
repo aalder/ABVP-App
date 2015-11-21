@@ -9,11 +9,36 @@
     <link rel="stylesheet" type="text/css" href="../style.css">
   </head>
   <body>
-    <div id="available-tasks" class="front-page">
-    </div>
-    <div id="available-volunteers" class="front-page">
+    <div class="header">
+      <div id='menu'>
+        <ul>
+           <li class='active'><a href='tracking.html'><span>Home</span></a></li>
+           <li><a href='checkin-react.html'><span>Check In</span></a></li>
+           <li><a href='#'><span>Check Out</span></a></li>
+           <li><a href='database.html'><span>Database</span></a></li>
+           <li class='last'><a href='../index.html'><span>Log Out</span></a></li>
+        </ul>
+      </div>
 
+      <h1>Check Out</h1>
     </div>
+
+    <!-- Search Bar -->
+    <div class="box">
+      <div class="container-1">
+          <span class="icon"><i class="fa fa-search"></i></span>
+          <input type="search" id="search" placeholder="Search ... Comming Soon!" />
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+
+
+    <div id="available-tasks" class="front-page"></div>
+
+    <div id="available-volunteers" class="front-page"></div>
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="../js/url.min.js"></script>
     <script type="text/babel">
@@ -30,7 +55,7 @@
             error: function(xhr, status, err) {
               console.error(this.props.taskUrl, status, err.toString());
             }.bind(this)
-          });          
+          });
         },
         getInitialState: function() {
           return {data: []};
@@ -44,7 +69,7 @@
           var taskNodes = taskData.map(function(task) {
             return (
               <option key={task.id} className="task-option" value={task.id}>{task.name} ({task.room})</option>
-            );     
+            );
           });
           return(
             <div className="task-select-container">
@@ -69,7 +94,7 @@
             error: function(xhr, status, err) {
               console.error(this.props.availUrl, status, err.toString());
             }.bind(this)
-          });          
+          });
         },
         getInitialState: function() {
           return {data: []};
@@ -118,7 +143,7 @@
               <div key={vol.id} className="volunteer-checkbox">
                 <input type="checkbox" name="avail-vol" value={vol.id}/>{vol.first_name} {vol.last_name}
               </div>
-            );     
+            );
           });
           return(
             <form className="availableForm" onSubmit={this.handleSubmit}>

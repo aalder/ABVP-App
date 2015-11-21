@@ -9,60 +9,88 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div id="volunteer-info" class="front-page">
+    <div id="profile-page">
+      <!--HEADER-->
+      <div id="header-profile">
+        <h1>VOLUNTEER CARD</h1>
+      </div>
+      <div id="left"></div>
+      <div id="right"></div>
+      <div id="top"></div>
+      <div id="bottom"></div>
+      <div id="volunteer-info" class="front-page"><   /div>
 
+      <!--FILLS IN PROFILE INFORMATION-->
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/url.min.js"></script>
     <script type="text/babel">
+        var ProfileBox = React.createClass({
+          loadProfile: function() {
+            $.ajax({
+              url: this.props.url,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                this.setState({data: data});
+                document.title = data.first_name + "'s Profile";
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+          },
+          getInitialState: function() {
+            return {data: []};
+          },
+          componentDidMount: function() {
+            this.loadProfile();
+            setInterval(this.loadProfile, this.props.pollInterval);
+          },
+          render: function() {
+            var volData = this.state.data;
+            return(
+              <div className="profileBox">
+                <h1>Volunteer Profile</h1>
+                <div className="profileInformation">
+                  <h2>{volData.first_name} {volData.last_name}</h2>
+                  <div className="imageStack">
+                    <img src={'images/profilePic.png'} className="profilePic"/>
+                    <br/>
+                    <button type="button">Apply to Volunteer</button>
+                  </div>
 
-      var ProfileBox = React.createClass({
-        loadProfile: function() {
-          $.ajax({
-            url: this.props.url,
-            dataType: 'json',
-            cache: false,
-            success: function(data) {
-              this.setState({data: data});
-              document.title = data.first_name + "'s Profile";
-            }.bind(this),
-            error: function(xhr, status, err) {
-              console.error(this.props.url, status, err.toString());
-            }.bind(this)
-          });          
-        },
-        getInitialState: function() {
-          return {data: []};
-        },
-        componentDidMount: function() {
-          this.loadProfile();
-          setInterval(this.loadProfile, this.props.pollInterval);
-        },
-        render: function() {
-          var volData = this.state.data;
-          return(
-            <div className="profileBox">
-              <h1>Volunteer Profile</h1>
-              <h2>{volData.first_name} {volData.last_name}</h2>
-              <p>Username: {volData.username}</p>
-              <a href=""> Change Password</a>
-              <p> Birthdate: {volData.birthdate}</p>
-              <p> Address: {volData.address}<br/>{volData.city}, {volData.state} {volData.zipcode}</p>
-              <p>Phone: {volData.phone}</p>
-              <p>Emergency Contact:</p>
-              <div className="emergency contact">
-                <p>Name: </p>
-                <p>Phone: </p>
-                <p>Email:</p>
+                  <div className="subInfo">
+                    <p>Username: {volData.username}</p>
+                    <p> Birthdate: {volData.birthdate}</p>
+                    <p> Address: {volData.address}<br/>{volData.city}, {volData.state} {volData.zipcode}</p>
+                    <p>Phone: {volData.phone}</p>
+                    <p>Emergency Contact:</p>
+                    <div className="emergency contact">
+                      <p>Name: </p>
+                      <p>Phone: </p>
+                      <p>Email:</p>
+                    </div>
+                    <p>Total Hours Ever:</p>
+                    <p>Total Hours This Year: </p>
+                  </div>
+                  <div className="secondColumn">
+                    <a href="">Edit Profile</a>
+                  </div>
+                <h3>Application Status: </h3>
+                </div>
+                <div className="badges">
+                  <h2>Badges:</h2>
+                </div>
               </div>
-              <p>Total Hours Ever:</p>
-              <p>Total Hours This Year: </p>
-              <a href="">Update this Information</a>
-            </div>
-          );
-        }
-      });
+            );
+          }
+        });
 
+<<<<<<< HEAD
+        var id = url('?id');
+        var profileBoxDiv = <ProfileBox url={"http://localhost:8000/volunteer/" + id} pollInterval={10000} />;
+=======
       var hostUrl = "";
       if (document.location.hostname == "localhost") {
         hostUrl = "http://localhost:8000/api/";
@@ -73,11 +101,13 @@
 
       var id = url('?id');
       var profileBoxDiv = <ProfileBox url={hostUrl + "volunteer/" + id} pollInterval={10000} />;
+>>>>>>> master
 
-      ReactDOM.render(
-       profileBoxDiv,
-        document.getElementById('volunteer-info')
-      );
-    </script>
+        ReactDOM.render(
+         profileBoxDiv,
+          document.getElementById('volunteer-info')
+        );
+      </script>
+    </div>
   </body>
 </html>

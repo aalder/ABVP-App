@@ -1,0 +1,349 @@
+@import url(https://fonts.googleapis.com/css?family=Lora);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
+
+/*FONTS*/
+$LORA: 'Lora', serif;
+$ALICE: 'Alice', serif;
+$VERDANA: Verdana, sans-serif;
+
+/*COLORS*/
+$BLACK: #000000;
+$WHITE: #FFFFFF;
+$GRAY: #EEEEEE;
+$PURPLE: #590085;
+$YELLOW: #F7CF00;
+$PINK: #FF008B;
+
+/*GENERALS*/
+body {
+  font-family: $VERDANA;
+  font-weight: normal;
+  margin: 0;
+}
+
+html {
+  background: url(images/abvpapp_bg01.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/*HEADER & FOOTER*/
+.header {
+    h1 {
+        padding-left: 100px;
+    }
+}
+
+#menu {
+    background: $PURPLE;
+    width: auto;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        display: block;
+        zoom: 1;
+
+        &:after {
+            content: " ";
+            display: block;
+            font-size: 0;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        li {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+
+            a {
+                color: #ffffff;
+                text-decoration: none;
+                display: block;
+                padding: 15px 25px;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 14px;
+                position: relative;
+                -webkit-transition: color .25s;
+                -moz-transition: color .25s;
+                -ms-transition: color .25s;
+                -o-transition: color .25s;
+                transition: color .25s;
+
+                &:hover {
+                    color: $YELLOW;
+
+                    &:before {
+                        width: 100%;
+                    }
+                }
+
+                &:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    right: -3px;
+                    top: 19px;
+                    height: 6px;
+                    width: 6px;
+                    background: #ffffff;
+                    opacity: .5;
+                }
+
+                &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 3px;
+                    width: 0;
+                    background: $YELLOW;
+                    -webkit-transition: width .25s;
+                    -moz-transition: width .25s;
+                    -ms-transition: width .25s;
+                    -o-transition: width .25s;
+                    transition: width .25s;
+                }
+            }
+
+            .last > a:after, &:last-child > a:after {
+                display: none;
+            }
+
+            .active {
+                a {
+                    color: $YELLOW;
+
+                    &:before {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .align-right {
+        ul {
+            text-align: center;
+
+            li {
+                float: right;
+            }
+        }
+    }
+}
+#menu.align-right li.last > a:after,
+#menu.align-right li:last-child > a:after {
+  display: block;
+}
+#menu.align-right li:first-child a:after {
+  display: none;
+}
+
+
+
+/*LOGIN PAGE*/
+#frontpage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align:center;
+}
+
+/*PROFILE PAGE*/
+
+//puts together the boarder
+#profile-page {
+    #top, #bottom, #left, #right {
+        background: black;
+        position: fixed;
+    }
+    #left, #right {
+        top: 0; bottom: 0;
+        width: 15px;
+    }
+    #left { left: 0; }
+    #right { right: 0; }
+
+    #top, #bottom {
+        left: 0; right: 0;
+        height: 15px;
+    }
+    #top { top: 0; }
+    #bottom { bottom: 0; }
+}
+
+
+#header-profile {
+    h1 {
+        padding: 5px 0 5px 150px;
+        font-size: 30pt;
+    }
+}
+
+#volunteer-info {
+    padding-bottom: 500px;
+}
+
+.profileBox {
+    padding: 0 50px 0 50px;
+
+    .profileInformation {
+        width: 100%;
+        float:left;
+        padding: 0px 10px 0px 10px;
+        margin: 25px;
+        margin-top: 0px;
+
+        .subInfo {
+            padding-left: 30px;
+            padding-bottom: 30px;
+            width: 50%;
+
+            .imported {
+                display: inline-block;
+                vertical-align: bottom;
+                text-decoration: bold;
+                color: $PURPLE;
+            }
+        }
+
+        h1 {
+
+        }
+
+        .imageStack {
+            float: right;
+            padding-right: 50px;
+
+            img {
+                vertical-align: top;
+                height: 200px;
+                display: block;
+            }
+
+            button {
+                padding: 10px 100px 10px 100px;
+                background-color: $PURPLE;
+                border: none;
+                color: white;
+                font-size: 20px;
+                text-decoration:none;
+                float: right;
+                border-radius: 25px;
+
+                &:hover {
+                    color: black;
+                    background-color: $PINK;
+                }
+            }
+        }
+
+        .secondColumn {
+            width: 200 px;
+        }
+
+        h3 {
+            display: inline;
+            padding-bottom: 10px;
+        }
+
+        a {
+            padding-bottom: 10px;
+        }
+    }
+}
+
+/*CHECKIN & CHECKOUT*/
+.box {
+    padding-left: 50px;
+
+    .container-1{
+        width: 300px;
+        vertical-align: middle;
+        white-space: nowrap;
+        position: relative;
+
+        input#search{
+            width: 300px;
+            height: 50px;
+            background: $GRAY;
+            border: none;
+            font-size: 10pt;
+            float: left;
+            color: #63717f;
+            padding-left: 45px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+
+            &::-webkit-input-placeholder {
+               color: #65737e;
+            }
+
+            &:-moz-placeholder { /* Firefox 18- */
+               color: #65737e;
+            }
+
+            &::-moz-placeholder {  /* Firefox 19+ */
+               color: #65737e;
+            }
+
+            &:-ms-input-placeholder {
+               color: #65737e;
+            }
+        }
+
+        .icon{
+            position: absolute;
+            top: 50%;
+            margin-left: 17px;
+            margin-top: 17px;
+            z-index: 1;
+            color: #4f5b66;
+        }
+    }
+}
+
+#check-in {
+
+}
+
+
+@media screen and (max-width: 768px) {
+    #menu ul li {
+        float: none;
+        display: block;
+
+        a{
+            width: 100%;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border-bottom: 1px solid #fb998c;
+
+            &:after {
+                display: none;
+            }
+
+            &:before {
+                display: none;
+            }
+        }
+
+        .last > a, &:last-child > a{
+            border: 0;
+        }
+    }
+}

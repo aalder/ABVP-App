@@ -9,9 +9,22 @@
     <link rel="stylesheet" type="text/css" href="../style.css">
   </head>
   <body>
-    <div id="available-volunteers" class="front-page">
+    <div class="header">
+      <div id='menu'>
+        <ul>
+           <li class='active'><a href='tracking.html'><span>Home</span></a></li>
+           <li><a href='#'><span>Check In</span></a></li>
+           <li><a href='checkout-react.html'><span>Check Out</span></a></li>
+           <li><a href='database.html'><span>Database</span></a></li>
+           <li class='last'><a href='../index.html'><span>Log Out</span></a></li>
+        </ul>
+      </div>
 
+      <h1>Check In</h1>
     </div>
+
+    <!-- For the React -->
+    <div id="available-volunteers" class="front-page"></div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="../js/url.min.js"></script>
     <script>
@@ -51,7 +64,7 @@
 
       var TaskVolunteersBox = React.createClass({
         render: function() {
-          
+
           var volData = this.props.volunteers;
           var volNodes = volData.map(function(vol){
             var coTime = new Date(vol.check_out);
@@ -82,7 +95,7 @@
             error: function(xhr, status, err) {
               console.error(this.props.openUrl, status, err.toString());
             }.bind(this)
-          });          
+          });
         },
         getInitialState: function() {
           return {data: []};
@@ -131,7 +144,7 @@
                 <p>{task.name} ({task.location})</p>
                 <TaskVolunteersBox volunteers = {task.volunteers} />
               </div>
-            );     
+            );
           });
           return(
             <form className="checkinForm" onSubmit={this.handleSubmit}>
@@ -157,7 +170,7 @@
         document.getElementById('available-volunteers')
       );
 
-      
+
     </script>
   </body>
 </html>
