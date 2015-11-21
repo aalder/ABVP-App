@@ -154,9 +154,17 @@
           );
         }
       });
+      
+      var hostUrl = "";
+      if (document.location.hostname == "localhost") {
+        hostUrl = "http://localhost:8000/api/";
+      }
+      else {
+        hostUrl = "http://minion.wingchi.net/api/";
+      }
 
-      var taskFormDiv = <TaskForm taskUrl={"http://localhost:8000/availabletasks/"} pollInterval={3000} />;
-      var availableFormDiv = <AvailableForm availUrl={"http://localhost:8000/available/"} coUrl={"http://localhost:8000/checkout/"} pollInterval={1000} />;
+      var taskFormDiv = <TaskForm taskUrl={hostUrl + "availabletasks/"} pollInterval={3000} />;
+      var availableFormDiv = <AvailableForm availUrl={hostUrl + "available/"} coUrl={hostUrl + "checkout/"} pollInterval={1000} />;
 
       ReactDOM.render(
        taskFormDiv,
