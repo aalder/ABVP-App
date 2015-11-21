@@ -41,8 +41,26 @@
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="../js/url.min.js"></script>
-    <script type="text/babel">
 
+    <!-- remove this after login works -->
+    <!--  Safety Pig           _
+      _._ _..._ .-',     _.._(`))
+     '-. `     '  /-._.-'    ',/
+        )         \            '.
+       / _    _    |             \
+      |  a    a    /              |
+      \   .-.                     ;  
+       '-('' ).-'       ,'       ;
+          '-;           |      .'
+             \           \    /
+             | 7  .__  _.-\   \
+             | |  |  ``/  /`  /
+            /,_|  |   /,_/   /
+               /,_/      '`-'
+   -->
+    <script src="../js/cookie-stopgap.js"></script>
+
+    <script type="text/babel">
       var TaskForm = React.createClass({
         loadList: function() {
           $.ajax({
@@ -118,7 +136,7 @@
           });
 
           var coTime = (new Date()).getTime();
-          var checkOutData = {logged_by: 2, time: coTime, task: coTask, users: availVolArray}
+          var checkOutData = {logged_by: currentUserId, time: coTime, task: coTask, users: availVolArray}
           console.log(JSON.stringify(checkOutData))
 
            $.ajax({
@@ -137,11 +155,19 @@
           });
         },
         render: function() {
+          var imgUrl = "";
+          if (document.location.hostname == "localhost") {
+            imgUrl = "http://localhost:8080/volunteer/";
+          }
+          else {
+            imgUrl = "http://minion.wingchi.net/volunteer-media/";
+          }
+
           var availData = this.state.data;
           var volNodes = availData.map(function(vol) {
             return (
               <div key={vol.id} className="volunteer-checkbox">
-                <input type="checkbox" name="avail-vol" value={vol.id}/>{vol.first_name} {vol.last_name}
+                <input type="checkbox" name="avail-vol" value={vol.id} id={"vol" + vol.id}/><label htmlFor={"vol" + vol.id}><img src={imgUrl + vol.profile_url} alt={vol.id} style={{width: "auto", height: "50px"}} /> {vol.first_name} {vol.last_name}</label>
               </div>
             );
           });

@@ -7,7 +7,7 @@ from datetime import date
 class Volunteer(models.Model):
     user = models.OneToOneField(User)
     is_banned = models.BooleanField(default=False)
-    photo = models.ImageField(upload_to='profiles', null=True)
+    photo = models.ImageField(upload_to='images/profiles', null=True)
     phone = models.CharField(max_length=10, null=True)
     address = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)

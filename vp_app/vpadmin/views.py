@@ -18,6 +18,9 @@ from pytz import timezone
 import pytz
 import time
 
+#handle image files
+from django.core.files.images import ImageFile
+
 def index(request):
     volunteers = Volunteer.objects.all()
     # vol_data_all = {}
@@ -125,6 +128,10 @@ def open_logs(request):
         open_entry['user_id'] = entry.volunteer.id
         open_entry['first_name'] = entry.volunteer.first_name
         open_entry['last_name'] = entry.volunteer.last_name
+        if entry.volunteer.volunteer.photo:
+            open_entry['profile_url'] = entry.volunteer.volunteer.photo.url
+        else:
+            open_entry['profile_url'] = ''
         open_entry['check_out'] = time.mktime(entry.check_out.timetuple())*1000
         (open_entries[str(entry.task_location.id)])['volunteers'].append(open_entry)
     print(open_entries)
@@ -148,6 +155,10 @@ def available_vols(request):
         available['id'] = user.id
         available['first_name'] = user.first_name
         available['last_name'] = user.last_name
+        if user.volunteer.photo:
+            available['profile_url'] = user.volunteer.photo.url
+        else:
+            available['profile_url'] = ''
         available_array.append(available)
     return HttpResponse(json.dumps(available_array))
 
@@ -163,3 +174,24 @@ def available_tasks(request):
         avail_tasks_array.append(task_dict)
     return HttpResponse(json.dumps(avail_tasks_array))
 
+@csrf_exempt
+def update_profile_picture(request, vol_id):
+    if request.method == 'POST':
+        # for file_key in sorted(request.FILES):
+        #     print(file_key);
+        # wrapped_file = ImageFile(request.FILES[profile-picture])
+        # filename = wrapped_file.name
+
+        volunteer = Volunteer.objects.get(pk = vol_id)
+        volunteer.photo = request.FILES['profile-picture']
+
+        try:
+            volunteer.save()
+            return HttpResponse('{"url": ' + volunteer.photo.url + '}')
+        except OSError:
+            print "Image upload error"
+            return HttpResponse('{"result": "failure"}')
+    else:
+        return HttpResponse('{"result": "request was not a POST"}')
+
+    

@@ -27,6 +27,23 @@
     <div id="available-volunteers" class="front-page"></div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="../js/url.min.js"></script>
+    <!-- remove this after login works -->
+    <!--  Safety Pig           _
+      _._ _..._ .-',     _.._(`))
+     '-. `     '  /-._.-'    ',/
+        )         \            '.
+       / _    _    |             \
+      |  a    a    /              |
+      \   .-.                     ;  
+       '-('' ).-'       ,'       ;
+          '-;           |      .'
+             \           \    /
+             | 7  .__  _.-\   \
+             | |  |  ``/  /`  /
+            /,_|  |   /,_/   /
+               /,_/      '`-'
+   -->
+    <script src="../js/cookie-stopgap.js"></script>
     <script>
       String.prototype.toHHMMSS = function () {
         var sec_num = parseInt(this, 10); // don't forget the second param
@@ -64,6 +81,13 @@
 
       var TaskVolunteersBox = React.createClass({
         render: function() {
+          var imgUrl = "";
+          if (document.location.hostname == "localhost") {
+            imgUrl = "http://localhost:8080/volunteer/";
+          }
+          else {
+            imgUrl = "http://minion.wingchi.net/volunteer-media/";
+          }
 
           var volData = this.props.volunteers;
           var volNodes = volData.map(function(vol){
@@ -72,7 +96,7 @@
             var totalTime = totalMs/1000;
             // console.log((totalTime.toString()).toHHMMSS());
             return (
-              <p className="volunteer-node" key={vol.user_id}><input type="checkbox" name="task-vol" data-task={vol.task_id} value={vol.user_id} />{vol.first_name} {vol.last_name} ({(totalTime.toString()).toHHMMSS()})</p>
+              <p className="volunteer-node" key={vol.user_id}><input id={"vol-" + vol.user_id} type="checkbox" name="task-vol" data-task={vol.task_id} value={vol.user_id} /><label htmlFor={"vol-" + vol.user_id}><img src={imgUrl + vol.profile_url} alt={vol.user_id} style={{width: "auto", height: "50px"}} />{vol.first_name} {vol.last_name} ({(totalTime.toString()).toHHMMSS()})</label></p>
             );
           });
           return (
@@ -118,7 +142,7 @@
           });
 
           var ciTime = (new Date()).getTime();
-          var checkOutData = {logged_by: 2, time: ciTime, users: openVolArray}
+          var checkOutData = {logged_by: currentUserId, time: ciTime, users: openVolArray}
           console.log(JSON.stringify(checkOutData))
 
            $.ajax({
@@ -163,7 +187,7 @@
         hostUrl = "http://minion.wingchi.net/api/";
       }
 
-      var checkinFormDiv = <CheckinForm openUrl={hostUrl + "checkedout/"} ciUrl={"http://localhost:8000/checkin/"} pollInterval={1000} />;
+      var checkinFormDiv = <CheckinForm openUrl={hostUrl + "checkedout/"} ciUrl={hostUrl + "checkin/"} pollInterval={1000} />;
 
       ReactDOM.render(
        checkinFormDiv,
