@@ -139,7 +139,7 @@
       }
 
       var taskFormDiv = <TaskForm taskUrl={hostUrl + "availabletasks/"} pollInterval={3000} />;
-      var availableFormDiv = <AvailableForm availUrl={hostUrl + "available/"} coUrl={"http://localhost:8000/checkout/"} pollInterval={1000} />;
+      var availableFormDiv = <AvailableForm availUrl={hostUrl + "available/"} coUrl={hostUrl + "checkout/"} pollInterval={1000} />;
 
       ReactDOM.render(
        taskFormDiv,
