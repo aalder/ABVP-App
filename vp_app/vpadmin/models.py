@@ -31,14 +31,18 @@ class Volunteer(models.Model):
             zipcode=self.zipcode,
             birthdate=str(self.birthdate),)
 
-class TaskLocation(models.Model):
-    name = models.CharField(max_length=100)
+class Location(models.Model):
     room = models.CharField(max_length=50)
+    is_active = models.BooleanField(default=True)
+
+class Task(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.ForeignKey(Location)
     is_active = models.BooleanField(default=True)
 
 class ShiftLog(models.Model):
     volunteer = models.ForeignKey(User, null=True, related_name='vol_user')
-    task_location = models.ForeignKey(TaskLocation, null=True)
+    task = models.ForeignKey(Task, null=True)
     co_logged_by = models.ForeignKey(User, null=True, related_name='co_logged_by')
     check_out = models.DateTimeField(null=True)
     ci_logged_by = models.ForeignKey(User, null=True, related_name='ci_logged_by')
@@ -46,7 +50,7 @@ class ShiftLog(models.Model):
     total_hours = models.FloatField(null=True)
     
 class VolunteerRequest(models.Model):
-    task_location = models.ForeignKey(TaskLocation)
+    task = models.ForeignKey(Task, null=True)
     number_volunteers = models.IntegerField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

@@ -187,7 +187,7 @@
         hostUrl = "http://minion.wingchi.net/api/";
       }
 
-      var checkinFormDiv = <CheckinForm openUrl={hostUrl + "checkedout/"} ciUrl={hostUrl + "checkin/"} pollInterval={1000} />;
+      var checkinFormDiv = <CheckinForm openUrl={hostUrl + "checkedout/"} ciUrl={hostUrl + "checkin/"} pollInterval={10000} />;
 
       ReactDOM.render(
        checkinFormDiv,

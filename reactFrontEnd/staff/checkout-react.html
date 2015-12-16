@@ -189,8 +189,8 @@
         hostUrl = "http://minion.wingchi.net/api/";
       }
 
-      var taskFormDiv = <TaskForm taskUrl={hostUrl + "availabletasks/"} pollInterval={3000} />;
-      var availableFormDiv = <AvailableForm availUrl={hostUrl + "available/"} coUrl={hostUrl + "checkout/"} pollInterval={1000} />;
+      var taskFormDiv = <TaskForm taskUrl={hostUrl + "availabletasks/"} pollInterval={10000} />;
+      var availableFormDiv = <AvailableForm availUrl={hostUrl + "available/"} coUrl={hostUrl + "checkout/"} pollInterval={10000} />;
 
       ReactDOM.render(
        taskFormDiv,

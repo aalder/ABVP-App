@@ -7,7 +7,7 @@ import json
 
 # models
 from django.contrib.auth.models import User
-from .models import Volunteer, TaskLocation, ShiftLog, VolunteerRequest
+from .models import Volunteer, Task, Location, ShiftLog, VolunteerRequest
 
 #CSRF exemption for testing
 from django.views.decorators.csrf import csrf_exempt
@@ -55,7 +55,7 @@ def checkout(request):
         co_data = json.loads(request.body)
         co_timestamp = datetime.fromtimestamp(co_data['time']/1000.0)
         co_logged_by = User.objects.get(pk=co_data['logged_by'])
-        co_tasklocation = TaskLocation.objects.get(pk=co_data['task'])
+        co_task = Task.objects.get(pk=co_data['task'])
         # print(co_logged_by)
         # print(co_timestamp)
         for user in co_data['users']:
@@ -63,7 +63,7 @@ def checkout(request):
             if ShiftLog.objects.filter(volunteer=vol, check_in = None):
                 print("Error: " + str(vol.first_name) + " " + str(vol.last_name) + " is already checked out")
             else:
-                shiftlog_new = ShiftLog(volunteer=vol, co_logged_by = co_logged_by, check_out = co_timestamp, task_location = co_tasklocation)
+                shiftlog_new = ShiftLog(volunteer=vol, co_logged_by = co_logged_by, check_out = co_timestamp, task = co_task)
                 shiftlog_new.save()
         return HttpResponse('{"result": "success"}')
     except Exception as e:
@@ -84,9 +84,9 @@ def checkin(request):
         
         for user in ci_data['users']:
             vol = User.objects.get(pk=user['id'])
-            ci_tasklocation = TaskLocation.objects.get(pk=user['task'])
+            ci_task = Task.objects.get(pk=user['task'])
             try:
-                shiftlog_entry = ShiftLog.objects.filter(volunteer = vol, task_location = ci_tasklocation, check_in = None)[0]
+                shiftlog_entry = ShiftLog.objects.filter(volunteer = vol, task = ci_task, check_in = None)[0]
 
                 co_timestamp = shiftlog_entry.check_out.replace(tzinfo=None)
                 total_timedelta =  ci_timestamp - co_timestamp
@@ -109,12 +109,12 @@ def open_logs(request):
     # try:
     open_entries = {}
     
-    tasks = TaskLocation.objects.filter(is_active = True)
+    tasks = Task.objects.filter(is_active = True)
     for task in tasks:
         open_task = {}
         open_task['task_id'] = task.id
         open_task['name'] = task.name
-        open_task['location'] = task.room
+        open_task['location'] = task.location.room
         open_task['volunteers'] = []
         open_entries[str(task.id)] = open_task
 
@@ -122,9 +122,9 @@ def open_logs(request):
     print(log_entries)
     for entry in log_entries:
         open_entry = {}
-        open_entry['task_id'] = entry.task_location.id
-        open_entry['task_name'] = entry.task_location.name
-        open_entry['task_location'] = entry.task_location.room
+        open_entry['task_id'] = entry.task.id
+        open_entry['task_name'] = entry.task.name
+        open_entry['task_location'] = entry.task.location.room
         open_entry['user_id'] = entry.volunteer.id
         open_entry['first_name'] = entry.volunteer.first_name
         open_entry['last_name'] = entry.volunteer.last_name
@@ -133,7 +133,7 @@ def open_logs(request):
         else:
             open_entry['profile_url'] = ''
         open_entry['check_out'] = time.mktime(entry.check_out.timetuple())*1000
-        (open_entries[str(entry.task_location.id)])['volunteers'].append(open_entry)
+        (open_entries[str(entry.task.id)])['volunteers'].append(open_entry)
     print(open_entries)
     return HttpResponse(json.dumps(open_entries.values()))
 
@@ -164,13 +164,13 @@ def available_vols(request):
 
 @csrf_exempt
 def available_tasks(request):
-    tasks = TaskLocation.objects.filter(is_active = True)
+    tasks = Task.objects.filter(is_active = True)
     avail_tasks_array = []
     for task in tasks:
         task_dict = {}
         task_dict['id'] = task.id
         task_dict['name'] = task.name
-        task_dict['room'] = task.room
+        task_dict['room'] = task.location.room
         avail_tasks_array.append(task_dict)
     return HttpResponse(json.dumps(avail_tasks_array))
 
