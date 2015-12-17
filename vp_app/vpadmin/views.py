@@ -119,7 +119,7 @@ def open_logs(request):
         open_task['volunteers'] = []
         open_entries[str(task.id)] = open_task
 
-    log_entries = ShiftLog.objects.filter(check_in = None)
+    log_entries = ShiftLog.objects.filter(check_in = None).order_by('check_out', 'volunteer__last_name')
     print(log_entries)
     for entry in log_entries:
         open_entry = {}
@@ -148,7 +148,7 @@ def available_vols(request):
     print(checked_out)
     # users.exclude(checked_out__)
     print(users)
-    available_users = User.objects.filter(is_active = True, is_staff = False).exclude(id__in = checked_out)
+    available_users = User.objects.filter(is_active = True, is_staff = False).exclude(id__in = checked_out).order_by('last_name');
     print(available_users)
     available_array = []
     for user in available_users:
