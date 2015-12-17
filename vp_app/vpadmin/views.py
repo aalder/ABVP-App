@@ -92,7 +92,8 @@ def checkin(request):
                 total_timedelta =  ci_timestamp - co_timestamp
                 total_hours = total_timedelta.seconds/60.0/60.0
 
-                print(total_hours)
+                if(total_hours > 2):
+                    total_hours = 2;
 
                 shiftlog_entry.total_hours = total_hours
                 shiftlog_entry.check_in = ci_timestamp
