@@ -21,6 +21,9 @@ import time
 #handle image files
 from django.core.files.images import ImageFile
 
+#Sum function for query
+from django.db.models import Sum
+
 def index(request):
     volunteers = Volunteer.objects.all()
     # vol_data_all = {}
@@ -67,7 +70,7 @@ def checkout(request):
                 shiftlog_new.save()
         return HttpResponse('{"result": "success"}')
     except Exception as e:
-        print(e);
+        print(e)
         return HttpResponse('{"result": "failure"}')
 
 @csrf_exempt
@@ -93,7 +96,7 @@ def checkin(request):
                 total_hours = total_timedelta.seconds/60.0/60.0
 
                 if(total_hours > 2):
-                    total_hours = 2;
+                    total_hours = 2
 
                 shiftlog_entry.total_hours = total_hours
                 shiftlog_entry.check_in = ci_timestamp
@@ -148,7 +151,7 @@ def available_vols(request):
     print(checked_out)
     # users.exclude(checked_out__)
     print(users)
-    available_users = User.objects.filter(is_active = True, is_staff = False).exclude(id__in = checked_out).order_by('last_name');
+    available_users = User.objects.filter(is_active = True, is_staff = False).exclude(id__in = checked_out).order_by('last_name')
     print(available_users)
     available_array = []
     for user in available_users:
@@ -179,7 +182,7 @@ def available_tasks(request):
 def update_profile_picture(request, vol_id):
     if request.method == 'POST':
         # for file_key in sorted(request.FILES):
-        #     print(file_key);
+        #     print(file_key)
         # wrapped_file = ImageFile(request.FILES[profile-picture])
         # filename = wrapped_file.name
 
@@ -195,4 +198,9 @@ def update_profile_picture(request, vol_id):
     else:
         return HttpResponse('{"result": "request was not a POST"}')
 
-    
+@csrf_exempt
+def volunteer_total_hours(request, vol_id):
+    user = User.objects.get(pk = vol_id)
+    total_hours = ShiftLog.objects.filter(volunteer = user).aggregate(Sum('total_hours'))
+    print(total_hours)
+    return HttpResponse(total_hours['total_hours__sum'])

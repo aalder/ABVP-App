@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^checkedout/$', views.open_logs, name='checkedout'),
     url(r'^available/$', views.available_vols, name='available'),
     url(r'^availabletasks/$', views.available_tasks, name='availabletasks'),
+    url(r'^volunteer/hours/(?P<vol_id>[0-9]+)/$', views.volunteer_total_hours, name='volunteer-total-hours'),
 ]

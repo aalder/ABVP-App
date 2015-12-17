@@ -82,7 +82,7 @@
       var TaskVolunteersBox = React.createClass({
         render: function() {
           var imgUrl = "";
-          if (document.location.hostname == "localhost") {
+          if (document.location.hostname === "localhost" || document.location.hostname === "") {
             imgUrl = "http://localhost:8080/volunteer/";
           }
           else {
@@ -180,7 +180,7 @@
       });
       
       var hostUrl = "";
-      if (document.location.hostname == "localhost") {
+      if (document.location.hostname === "localhost" || document.location.hostname === "") {
         hostUrl = "http://localhost:8000/api/";
       }
       else {
