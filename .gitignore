@@ -12,7 +12,7 @@ vp_app/vpadmin/migrations/
 
 # Specific files #
 ##################
-vp_app/vp_app/settings.py
+vp_app/vp_app/private-settings.py
 reactFrontEnd/.sass-cache/
 
 # OS generated files #
