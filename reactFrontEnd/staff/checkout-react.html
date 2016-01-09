@@ -23,16 +23,8 @@
       <h1>Check Out</h1>
     </div>
 
-    <!-- Search Bar -->
-    <div class="box">
-      <div class="container-1">
-          <span class="icon"><i class="fa fa-search"></i></span>
-          <input type="search" id="search" placeholder="Search ... Comming Soon!" />
-      </div>
-    </div>
-    <br/>
-    <br/>
-    <br/>
+    <!-- Scroll find feature -->
+
 
 
     <div id="available-tasks" class="front-page"></div>
@@ -49,7 +41,7 @@
         )         \            '.
        / _    _    |             \
       |  a    a    /              |
-      \   .-.                     ;  
+      \   .-.                     ;
        '-('' ).-'       ,'       ;
           '-;           |      .'
              \           \    /
@@ -90,6 +82,8 @@
             );
           });
           return(
+
+            // SELECT a task area
             <div className="task-select-container">
               <p className="admin-text">Select a task:</p>
               <select className="task-select" id="co-task-select">
@@ -166,8 +160,13 @@
           var availData = this.state.data;
           var volNodes = availData.map(function(vol) {
             return (
+              //Prints out the volunteers
               <div key={vol.id} className="volunteer-checkbox">
-                <input type="checkbox" name="avail-vol" value={vol.id} id={"vol" + vol.id}/><label htmlFor={"vol" + vol.id}><img src={imgUrl + vol.profile_url} alt={vol.id} style={{width: "auto", height: "50px"}} /> {vol.first_name} {vol.last_name}</label>
+                <input type="checkbox" name="avail-vol" value={vol.id} id={"vol" + vol.id}/>
+                  <label htmlFor={"vol" + vol.id}>
+                    <img src={imgUrl + vol.profile_url} alt={vol.id} style={{width: "auto", height: "50px"}} />
+                    {vol.first_name} {vol.last_name}
+                  </label>
               </div>
             );
           });
@@ -175,12 +174,13 @@
             <form className="availableForm" onSubmit={this.handleSubmit}>
                 <p className="admin-text">Assign volunteers:</p>
                 {volNodes}
+                <br/>
                 <input type="submit" value="Check Out"/>
             </form>
           );
         }
       });
-      
+
       var hostUrl = "";
       if (document.location.hostname == "localhost" || document.location.hostname === "") {
         hostUrl = "http://localhost:8000/api/";
