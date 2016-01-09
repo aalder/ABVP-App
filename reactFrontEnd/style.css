@@ -177,19 +177,25 @@ body {
 
 /* Dashboard & Tracking */
 #dashboard {
-  padding-left: 200px;
   width: 100%; }
   #dashboard .data {
-    background-color: #F7CF00;
-    color: #FF008B;
-    display: inline; }
-    #dashboard .data img {
-      height: 200px;
-      width: 300px; }
+    background-color: #EEEEEE;
+    color: #FF008B; }
+    #dashboard .data .data-point {
+      width: 30%;
+      padding: 20px;
+      text-align: center;
+      display: inline-block; }
+      #dashboard .data .data-point h1 {
+        font-size: 48pt;
+        color: #FFFFFF;
+        border: solid 5px;
+        border-color: #FF008B;
+        background-color: #FF008B; }
   #dashboard .tracking {
-    border-style: solid;
-    display: inline;
-    padding-left: 500px; }
+    border-bottom: #bebebe solid 1px;
+    background-color: #FFFFFF;
+    padding-left: 50px; }
 
 /*CHECKIN & CHECKOUT*/
 .volunteer-checkbox {

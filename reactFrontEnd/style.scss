@@ -13,6 +13,7 @@ $GRAY: #EEEEEE;
 $PURPLE: #590085;
 $YELLOW: #F7CF00;
 $PINK: #FF008B;
+$DARK_GRAY: #bebebe;
 
 /*GENERALS*/
 body {
@@ -268,23 +269,30 @@ html {
 
 /* Dashboard & Tracking */
 #dashboard {
-    padding-left: 200px;
     width: 100%;
 
     .data {
-        background-color: $YELLOW;
+        background-color: $GRAY;
         color: $PINK;
-        display: inline;
-        img {
-            height: 200px;
-            width: 300px;
+        .data-point {
+            width: 30%;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;
+            h1 {
+                font-size: 48pt;
+                color: $WHITE;
+                border: solid 5px;
+                border-color: $PINK;
+                background-color: $PINK;
+            }
         }
     }
 
     .tracking {
-        border-style: solid;
-        display: inline;
-        padding-left: 500px;
+        border-bottom: $DARK_GRAY solid 1px;
+        background-color: $WHITE;
+        padding-left: 50px;
     }
 }
 
