@@ -177,7 +177,8 @@ body {
 
 /* Dashboard & Tracking */
 #dashboard {
-  padding-left: 200px; }
+  padding-left: 200px;
+  width: 100%; }
   #dashboard .data {
     background-color: #F7CF00;
     color: #FF008B;
