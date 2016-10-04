@@ -1,3 +1,6 @@
+# Deprecated
+This project has been abandoned for now in favor of modifying an existing database. 
+
 # Arctic Bears App
 
 We're creating an app for manage a celebration of arctic bears.
